@@ -5,8 +5,8 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import model.CourierModel;
 
-import static data.CourierData.COURIER_CREATE_PATH;
-import static data.CourierData.COURIER_LOGIN_PATH;
+
+import static data.CourierData.*;
 import static io.restassured.RestAssured.given;
 
 public class CourierSteps {
@@ -34,5 +34,20 @@ public class CourierSteps {
             .then()
             .extract()
             .response();
+}
+
+@Step("Delete user")
+    public static void deleteCreatedCourier(CourierModel courier) {
+    Response response = loginCourier(courier);
+    if (response.statusCode() == 200) {
+        int id = response.path("id");
+        given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .when()
+                .delete(COURIER_DELETE_PATH + id)
+                .then()
+                .statusCode(200);
+    }
 }
 }

@@ -12,7 +12,7 @@ import static steps.CourierSteps.createCourier;
 import static steps.CourierSteps.loginCourier;
 
 public class CourierLoginTests extends BaseApiTest {
-
+    private CourierModel courier;
     private String login;
     private String password;
 
@@ -20,7 +20,7 @@ public class CourierLoginTests extends BaseApiTest {
     public void creationOfCourier() {
         login = LOGIN + System.currentTimeMillis();
         password = PASSWORD;
-        CourierModel courier = new CourierModel(login, password, FIRST_NAME);
+        courier = new CourierModel(login, password, FIRST_NAME);
 
         createCourier(courier)
                 .then()
@@ -32,7 +32,6 @@ public class CourierLoginTests extends BaseApiTest {
     @Test
     @Description("Successful courier login")
     public void successfulCourierLoginTest() {
-     CourierModel courier = new CourierModel(login, password);
 
         loginCourier(courier)
                 .then()
@@ -106,5 +105,6 @@ public class CourierLoginTests extends BaseApiTest {
 
     @After
     public void cleanUp() {
+        CourierSteps.deleteCreatedCourier(courier);
     }
 }

@@ -8,4 +8,5 @@ public class CourierData {
     public static final String FIRST_NAME = "dayeneris";
     public static final String COURIER_CREATE_PATH = "/api/v1/courier";
     public static final String COURIER_LOGIN_PATH = "/api/v1/courier/login";
+    public static final String COURIER_DELETE_PATH = "/api/v1/courier/";
 }
